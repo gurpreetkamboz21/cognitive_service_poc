@@ -1,0 +1,39 @@
+.result-text {
+  background: aquamarine;
+  padding: 5px 5px 5px 5px;
+  margin-top: 26px;
+  width: 100%;
+}
+
+hr {
+  background-color: seagreen;
+}
+
+img {
+  height: 200px;
+  width: 200px;
+  margin-left: 200px;
+  float: right;
+  border-style: inset;
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-file input[type="file"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}

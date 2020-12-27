@@ -1,0 +1,64 @@
+<div *ngIf="loading" class="spinner-border text-info" role="status">
+      <span class="sr-only">Loading...</span>
+</div>
+<div class="container">
+      <div class="row">
+            <div class="col-md-12"> Cognitive Services with custom model</div>
+      </div>
+      <hr>
+      <div class="row">
+            <form [formGroup]="myForm" (ngSubmit)="submit()" class="col-md-5">
+                  <div>
+                        <input [attr.disabled]="isTypePdf?'':null" type="password" id="filePassword"
+                              placeholder="Enter file password (if any)" class="form-control"
+                              formControlName="filePassword" />
+                  </div>
+                  <div class="row">
+
+                  
+                  <div class="col-md-5">
+                        <label style="margin-top: 15px;"><b>Upload File</b></label> <br />
+                        <div class="btn btn-success btn-file">
+                              Upload Files
+                              <input formControlName="file" type="file" id="input-file" (change)="onFileChange($event)"
+                                    multiple="true" />
+                        </div>
+                  </div>
+                  <div class="col-md-2" style="margin-top: 30px; font-weight: 800;">Or</div>
+                  <div class="col-md-5">
+                        <label style="margin-top: 15px;"><b>Upload from Folder</b></label> <br />
+                        <div class="btn btn-success btn-file">
+                              Upload from Folder
+                              <input formControlName="file" type="file" id="input-file" (change)="onFileChange($event)"
+                              webkitDirectory/>
+                        </div>
+                  </div>
+            </div>
+                  <p *ngIf="filename">{{ filename }}</p>
+                  <button [disabled]="loading" *ngIf="selectedFile" class="btn btn-primary" type="submit">
+                        Submit & Export
+                  </button>
+            </form>
+            <label class="col-md-2"><b>Select File Type</b></label>
+            <div class="col-md-5">
+                  <select class="form-control" #selectFileType (change)="onFileTypeChange()">
+                        <option *ngFor="let option of fileTypeList" [value]="option.value">
+                              {{option.text}}
+                        </option>
+                  </select>
+
+            </div>
+      </div>
+      <hr />
+      <button (click)="exportToCsv()" [disabled]="!showText" class="btn btn-success"> Export to CSV </button>
+      <br />
+      <div class="row">
+            <label class="col-md-12" style="margin-top: 10px;"><b>Result: </b></label>
+            <p class="col-md-12" *ngIf="showText">{{ showText }}</p>
+            <div class="col-md-12">
+                  <button *ngIf="showText" class="btn btn-danger" (click)="reset()">
+                        Clear
+                  </button>
+            </div>
+      </div>
+</div>

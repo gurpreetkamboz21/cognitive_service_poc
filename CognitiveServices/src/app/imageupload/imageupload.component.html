@@ -1,0 +1,90 @@
+<div *ngIf="loading" class="spinner-border text-info" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="container">
+  <div class="row">
+
+    <!-- <div class="col-md-4">
+      <label><strong>Select Language</strong></label>
+      <select class="form-control" (change)="onLanguageChange($event)">
+        <option *ngFor="let option of languageList" [value]="option.value">{{option.text}}</option>
+      </select>
+    </div> -->
+
+    <div class="col-md-6" *ngIf="selectedLanguage != 'hi'">
+      <label><b>Select service end point</b></label>
+      <select class="form-control" #selectService (change)="onServiceSelection()">
+        <option value="ocr">Use OCR End Point</option>
+        <option value="recognize">Use Recognize End Point</option>
+        <option value="batchanalyze">Use Batch Analyze End Point</option>
+      </select>
+    </div>
+
+    <div *ngIf="recognizeSelected && selectedLanguage != 'hi'" class="row col-md-6">
+      <label><b>Select Recognition mode</b></label>
+      <select class="form-control" #selectRecognizeOption>
+        <option value="p">Printed</option>
+        <option value="h">Handwritten</option>
+      </select>
+    </div>
+
+    <p *ngIf="selectedLanguage == 'hi'" style="margin-top: 12px;margin-left: 14px;margin-bottom: -12px;">
+      <i>
+        <strong>NOTE: </strong>
+        For language Hindi, we are using Google's Tesseract software (open source). &nbsp;&nbsp;&nbsp;&nbsp;
+      </i>
+    </p>
+  </div>
+  <br />
+  <hr />
+
+  <div class="row">
+    <form [formGroup]="myForm" (ngSubmit)="submit()">
+      <label><b>Upload Image File</b></label> <br />
+      <div class="btn btn-success btn-file">
+        Upload
+        <input formControlName="file" type="file" id="input-image-file" (change)="onFileChange($event)" />
+      </div>
+
+      <br /><br /><button *ngIf="imageSrc" class="btn btn-primary" type="submit">Submit</button>
+    </form>
+    <img [src]="imageSrc" *ngIf="imageSrc" />
+  </div>
+
+  <hr />
+  <div class="row">
+    <label><b>Paste Image URL</b></label>
+    <input class="form-control" id="input-url" type="url" placeholder="Enter/ paste image url" #urlInput />
+
+    <br /><br /><button class="btn btn-primary" (click)="submitURL()">
+      Submit
+    </button>
+  </div>
+
+  <hr />
+  <div class="row">
+    <label><b>Result: </b></label>
+    <br />
+    <p class="result-text" *ngIf="showText">{{ showText }}</p>
+
+    <div class="table-responsive table-bordered" *ngIf="resultArray.length">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" *ngFor="let item of resultArray; index as i">Text {{i + 1}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td *ngFor="let item of resultArray">{{item}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button *ngIf="showText || resultArray.length" class="btn btn-danger"
+      style="margin-top: 10px; margin-bottom: -10px;" (click)="reset()">
+      Clear
+    </button>
+  </div>
+</div>

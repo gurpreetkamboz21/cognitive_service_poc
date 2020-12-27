@@ -1,0 +1,67 @@
+<div *ngIf="loading" class="spinner-border text-info" role="status">
+      <span class="sr-only">Loading...</span>
+</div>
+<div class="container">
+      <div class="row">
+            <label class="col-md-4"><strong>Select Response Type</strong></label>
+            <select id="responseTypeSelect" class="form-control col-md-6" #responseTypeSelect>
+                  <option *ngFor="let option of responseTypeList" [value]="option.value">
+                        {{option.text}}
+                  </option>
+            </select>
+      </div>
+      <hr>
+      <div class="row">
+            <form [formGroup]="myForm" (ngSubmit)="submit()" class="col-md-5">
+
+                  <div *ngIf="fileTypeSelected == 'pdf'">
+                        <input type="password" id="filePassword" placeholder="Enter file password (if any)"
+                              class="form-control" formControlName="filePassword" />
+
+                        <br />
+                  </div>
+
+                  <label><b>Upload File</b></label> <br />
+                  <div class="btn btn-success btn-file">
+                        Upload
+                        <input formControlName="file" type="file" id="input-file" (change)="onFileChange($event)" />
+                  </div>
+
+                  <p *ngIf="filename">{{ filename }}</p>
+
+                  <br /><br />
+                  <button *ngIf="selectedFile" class="btn btn-primary" type="submit">
+                        Submit
+                  </button>
+            </form>
+
+            <label><b>Select File Type</b></label>
+            <div class="col-md-4">
+                  <select class="form-control" #selectFileType (change)="onFileTypeChange()">
+                        <option *ngFor="let option of fileTypeList" [value]="option.value">
+                              {{option.text}}
+                        </option>
+                  </select>
+            </div>
+      </div>
+
+      <hr />
+      <div class="row">
+            <label><b>Paste File URL</b></label>
+            <input class="form-control" id="input-url" type="url" placeholder="Enter/ paste image url" #urlInput />
+
+            <br /><br /><button class="btn btn-primary" (click)="submitURL()">
+                  Submit
+            </button>
+      </div>
+
+      <hr />
+      <div class="row">
+            <label><b>Result: </b></label>
+            <br />
+            <p class="result-text" *ngIf="showText">{{ showText }}</p>
+            <button *ngIf="showText" class="btn btn-danger" (click)="reset()">
+                  Clear
+            </button>
+      </div>
+</div>

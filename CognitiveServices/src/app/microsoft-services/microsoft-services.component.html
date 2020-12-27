@@ -1,0 +1,41 @@
+<div id="tabs" class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="javascript:void(0)" [ngClass]="{ active: activeTab === 'image' }"
+                        (click)="search('image')" data-toggle="tab">Computer Vision API Service (Microsoft)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" [ngClass]="{ active: activeTab === 'audio' }"
+                        data-toggle="tab" (click)="result('audio')">Speech Service (Microsoft)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" [ngClass]="{ active: activeTab === 'file' }"
+                        data-toggle="tab" (click)="result('file')">Form Recognizer Service (Microsoft)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" [ngClass]="{ active: activeTab === 'text' }"
+                        data-toggle="tab" (click)="result('text')">Translator Service (Microsoft)</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-8">
+            <br />
+            <div class="tab-content">
+                <div class="tab-pane fade show" id="image-section" [ngClass]="{ active: activeTab === 'image' }">
+                    <app-imageupload></app-imageupload>
+                </div>
+                <div class="tab-pane fade show" id="audio-section" [ngClass]="{ active: activeTab === 'audio' }">
+                    <app-audio></app-audio>
+                </div>
+                <div class="tab-pane fade show" id="file-section" [ngClass]="{ active: activeTab === 'file' }">
+                    <app-file></app-file>
+                </div>
+                <div class="tab-pane fade show" id="text-section" [ngClass]="{ active: activeTab === 'text' }">
+                    <app-text></app-text>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
